@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Sample</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+</head>
+<body>
+    <p align="center"><button style="margin-top:5px;" type="submit" class="btn btn-primary"><a href="{{url_for('login')}}" style="color: white;text-decoration: none;">Logout</a></button></p>
+    <br>
+    <center> <h6>A pie chart on your emotions till now</h6><div style="width: 250px;height: 250px;"><canvas id="pieChart"></canvas></div><br>
+    </center>
+    <script>
+       var ctx = document.getElementById("pieChart").getContext("2d");
+       var lineChart = new Chart(ctx,{
+           type:"pie",
+           data:{
+               labels: ['Happy','Sad','Neutral'],
+            datasets:[{
+                    label: "Emotion",
+                    data: {{ values|tojson}},
+                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
+                }]
+           },
+       })  
+    </script> <br><br> 
+    <center><div style="width: 700px;height: 700px;"><h6>A line chart on your average happiness till now</h6><br>
+        <form action="/dategraph" method="post">
+            <center><SELECT id = "date" name="date" method="GET" action="/">
+                {% for d in dateList %}
+                    <OPTION value="{{ d }}">{{ d }}</option>
+                {% endfor %}
+                </SELECT></center>
+                <p align="center"><button style="margin-top:5px;" type="submit" class="btn btn-primary">Submit</button></p>
+
+        </form><canvas id="barChart"></canvas></div><br><br><br></center>
+    <script>
+        var ctx = document.getElementById("barChart").getContext("2d");
+        var lineChart = new Chart(ctx,{
+            type:"line",
+            data:{
+                labels: {{ date|tojson}},
+            datasets:[{
+                label: "Average Happiness",
+                data: {{ happiness|tojson }},
+                backgroundColor: ["#ff0000"],
+            }]
+       },
+   })  
+    </script> 
+</body>
+</html>
