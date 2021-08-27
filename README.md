@@ -1,12 +1,6 @@
-# basic-flask-web-application
-A simple registration and login web application using Flask and SQLite3.
+# gaze-master-flask
+Steps to run this -
+1. First run both gazemaster.db and User.db to create tables.
+2. Then just run main.py to run the program and you are done.
 
-When using for the first time in Ubuntu:
-- Run the UserDB.py file.
-- Then, run the main.py file by using "export FLASK_APP=main.py".
-- Then, run the "flask run" command.
-
-Once done with the above steps, to run it again anytime you want; just run these two commands:
-- export FLASK_APP=main.py
-- flask run
 
